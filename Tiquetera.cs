@@ -49,9 +49,9 @@ public static class Tiquetera{
             }
         }
         int totaltipos = tipo1+tipo2+tipo3+tipo4;
-        //1,4 Porcentaje cada dia
+        //1,4 Porcentaje cada dia x entrada
         Estadisticas.Add((tipo1/totaltipos*100).ToString());Estadisticas.Add((tipo2/totaltipos*100).ToString());Estadisticas.Add((tipo3/totaltipos*100).ToString());Estadisticas.Add((tipo4/totaltipos*100).ToString());
-        //5,8 Suma cada dia
+        //5,8 Suma $ cada dia
         Estadisticas.Add(sumatipo1.ToString());Estadisticas.Add(sumatipo2.ToString());Estadisticas.Add(sumatipo3.ToString());Estadisticas.Add(sumatipo4.ToString());
         
         double sumaTotal = 0;
