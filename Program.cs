@@ -49,10 +49,59 @@ switch(opcion){
         MostrarEstadísticas(Tiquetera.EstadisticasTiquetera());
     break;
     case 3:
+        int idBuscar = Funciones.IngresarEntero("Ingresa el ID del cliente que quieras buscar");
+        Cliente buscado = Tiquetera.BuscarCliente(idBuscar);
+        Console.WriteLine("*DNI: " + buscado.DNI);
+        Console.WriteLine("*Apellido: " + buscado.Apellido);
+        Console.WriteLine("*Nombre: " + buscado.Nombre);
+        Console.WriteLine("*Fecha de inscripcion: " + buscado.FechaInscripcion.ToShortDateString());
+        Console.WriteLine("*Tipo de entrda: " + buscado.TipoEntrada);
+        Console.WriteLine("*Total abonado: " + buscado.TotalAbonado);
 
     break;
     case 4:
-
+        idBuscar = Funciones.IngresarEntero("Ingresa el ID del cliente que quieras modificar");
+        buscado = Tiquetera.BuscarCliente(idBuscar);
+        int tipo = Funciones.IngresarEnteroConRango("Ingresa el tipo de entrada al que quieras cambiar",1,4);
+        double precioEntrada = 0;
+        switch(tipo){
+            case 1:
+            precioEntrada = ENTRADA1;
+            break;
+            case 2:
+            precioEntrada = ENTRADA2;
+            break;
+            case 3:
+            precioEntrada = ENTRADA3;
+            break;
+            case 4:
+            precioEntrada = ENTRADA4;
+            break;
+        }
+        while(!Tiquetera.CambiarEntrada(idBuscar,tipo,precioEntrada)){
+            Console.WriteLine("No se pudo cambiar la entrada, el precio de esta debe ser mayor a de la anterior");
+            tipo = Funciones.IngresarEnteroConRango("Ingresa el tipo de entrada al que quieras cambiar",1,4);
+            precioEntrada = 0;
+            switch(tipo){
+                case 1:
+                    precioEntrada = ENTRADA1;
+                break;
+                case 2:
+                    precioEntrada = ENTRADA2;
+                break;
+                case 3:
+                    precioEntrada = ENTRADA3;
+                break;
+                case 4:
+                    precioEntrada = ENTRADA4;
+                break;
+            }
+        }
+        Console.WriteLine("Tendrás que agregar $"+(precioEntrada - buscado.TotalAbonado));
+        buscado.TipoEntrada = tipo;
+        buscado.TotalAbonado = precioEntrada;
+        buscado.FechaInscripcion = DateTime.Today;
+        Tiquetera.ActualizarCliente(idBuscar, buscado);
     break;
 }
 Funciones.PresionaParaContinuar();

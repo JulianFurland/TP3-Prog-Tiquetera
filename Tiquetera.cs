@@ -11,13 +11,15 @@ public static class Tiquetera{
         UltimoIDEntrada++;
         return id;
     }
-    public static Cliente BuscarCliente(int IDEntrada){
-        Cliente c = DicClientes[IDEntrada];
-        return c;
+    public static void ActualizarCliente(int id, Cliente c){
+        DicClientes[id] = c;
     }
-    public static bool CambiarEntrada(int id, int tipo, double total){
-        if(DicClientes[id].TotalAbonado<total){
-            DicClientes[id].TipoEntrada = tipo;
+    public static Cliente BuscarCliente(int IDEntrada){
+         return DicClientes[IDEntrada];
+    }
+    public static bool CambiarEntrada(int id, int tipo, double precioEntrada){
+        Cliente c = BuscarCliente(id);
+        if(c.TotalAbonado < precioEntrada){
             return true;
         }
         else return false;
